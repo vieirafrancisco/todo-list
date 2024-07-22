@@ -101,16 +101,20 @@
         flex-direction: column;
         gap: 10px;
 
+        color: #5a5e61;
+      }
+
+      .done-list span:nth-child(1) {
         text-decoration: line-through;
         font-style: italic;
-
-        color: #5a5e61;
       }
 
       .task {
         flex: 1;
         display: flex;
         justify-content: space-between;
+        align-items: center;
+        gap: 10px;
 
         padding: 1rem;
 
@@ -118,6 +122,22 @@
         border-radius: 0.475rem;
 
         white-space: normal;
+      }
+
+      .task__detail {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        gap: 5px;
+      }
+
+      .task__detail span:nth-child(1) {
+        word-break: break-all;
+      }
+
+      .task__detail span:nth-child(2) {
+        color: #aaa;
+        font-size: 12px;
       }
     </style>
   </head>
@@ -153,7 +173,10 @@
 
               {% for task in tasks_todo  %}
               <div class="task">
-                <span>{{ task.name }}</span>
+                <div class="task__detail">
+                  <span>{{ task.name }}</span>
+                  <span>{{ task.created_at }}</span>
+                </div>
                 <div class="actions">
                   <form action="{% url 'task-done' pk=task.pk %}" method="post">{% csrf_token %}
                     <button type="submit">Done</button>
@@ -174,7 +197,10 @@
 
               {% for task in tasks_done  %}
               <div class="task">
-                <span>{{ task.name }}</span>
+                <div class="task__detail">
+                  <span>{{ task.name }}</span>
+                  <span>{{ task.created_at }}</span>
+                </div>
                 <div class="actions">
                   <form action="{% url 'task-turn-back' pk=task.pk %}" method="post">{% csrf_token %}
                     <button type="submit">Retornar</button>

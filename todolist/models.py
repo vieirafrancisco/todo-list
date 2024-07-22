@@ -8,3 +8,5 @@ class Task(models.Model):
         max_length=4,
         default='todo'
     )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

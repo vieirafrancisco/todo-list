@@ -7,8 +7,8 @@ from todolist.models import Task
 
 class TodoView(View):
     def get(self, request):
-        tasks_todo = Task.objects.filter(status='todo').order_by('-id')
-        tasks_done = Task.objects.filter(status='done').order_by('-id')
+        tasks_todo = Task.objects.filter(status='todo').order_by('-updated_at')
+        tasks_done = Task.objects.filter(status='done').order_by('-updated_at')
 
         return render(
             request,
